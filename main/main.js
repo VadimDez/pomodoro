@@ -8,8 +8,8 @@
   require('jquery-circle-progress');
 
   let mainInterval;
-  let minutes = 0;
-  let seconds = 25;
+  let minutes = 25;
+  let seconds = 0;
   let restMinutes = 5;
   let countdownMinutes;
   let countdownSeconds;
@@ -17,6 +17,9 @@
   let isRest = false;
   let $progress = $('.progress');
   let $countdown = $('.countdown');
+  let $body = $('body');
+  const REST_CLASS = 'rest';
+  const SESSION_CLASS = 'session';
 
   $progress.circleProgress({
     value: 0,
@@ -52,6 +55,10 @@
   };
 
   const session = () => {
+    $body
+      .removeClass(REST_CLASS)
+      .addClass(SESSION_CLASS);
+
     isRest = false;
     countdownMinutes = minutes;
     countdownSeconds = seconds;
@@ -65,6 +72,10 @@
   };
 
   const rest = () => {
+    $body
+      .addClass(REST_CLASS)
+      .removeClass(SESSION_CLASS);
+
     isRest = true;
     countdownMinutes = restMinutes;
     countdownSeconds = seconds;
@@ -77,10 +88,11 @@
     });
   };
 
-  const onStart = () => {
-    session();
-    renderTime();
+  const isRunning = (value) => {
+    $body.toggleClass('running', value);
+  };
 
+  const tickProcess = () => {
     mainInterval = setInterval(() => {
       countdownSeconds--;
       if (countdownSeconds < 0) {
@@ -97,12 +109,21 @@
       }
       renderTime();
       updateProgress();
-    }, 1000)
+    }, 1000);
+  };
+
+  const onStart = () => {
+    isRunning(true);
+    tickProcess();
   };
 
   const onStop = () => {
+    isRunning(false);
     clearInterval(mainInterval);
   };
+
+  session();
+  renderTime();
 
   $('#start').on('click', onStart);
 
