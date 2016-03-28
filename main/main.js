@@ -8,41 +8,78 @@
   require('jquery-circle-progress');
 
   let mainInterval;
-  let minutes = 25;
-  let seconds = 0;
+  let minutes = 0;
+  let seconds = 25;
+  let restMinutes = 5;
   let countdownMinutes;
   let countdownSeconds;
+  let totalSeconds;
+  let isRest = false;
   let $progress = $('.progress');
   let $countdown = $('.countdown');
 
   $progress.circleProgress({
     value: 0,
-    size: 100,
-    animation: false,
-    fill: {
-      gradient: ["red", "orange"]
-    }
+    size: 300,
+    animation: false
   });
 
-  const render = () => {
-    $countdown.text(`${countdownMinutes}:${countdownSeconds}`);
+  /**
+   * Adjust value to have always two digits
+   * @param value
+   * @returns {string}
+   */
+  const doubleDigit = (value) => {
+    return '0'.concat(value).slice(-2);
   };
 
+  /**
+   * Render time
+   */
+  const renderTime = () => {
+    $countdown.text(`${doubleDigit(countdownMinutes)}:${doubleDigit(countdownSeconds)}`);
+  };
+
+  /**
+   * Update progress chart
+   */
   const updateProgress = () => {
-    const totalSeconds = minutes * 60 + seconds;
-    const percentage = (totalSeconds - countdownMinutes * 60 - countdownSeconds) / totalSeconds;
-    $progress.circleProgress('value', percentage);
+    $progress.circleProgress('value', (totalSeconds - countdownMinutes * 60 - countdownSeconds) / totalSeconds);
   };
 
   const clear = () => {
     clearInterval(mainInterval);
   };
 
-  const onStart = () => {
+  const session = () => {
+    isRest = false;
     countdownMinutes = minutes;
     countdownSeconds = seconds;
+    totalSeconds = minutes * 60 + seconds;
 
-    render();
+    $progress.circleProgress({
+      fill: {
+        color: '#ffffff'
+      }
+    });
+  };
+
+  const rest = () => {
+    isRest = true;
+    countdownMinutes = restMinutes;
+    countdownSeconds = seconds;
+    totalSeconds = restMinutes * 60 + seconds;
+
+    $progress.circleProgress({
+      fill: {
+        color: '#ffffff'
+      }
+    });
+  };
+
+  const onStart = () => {
+    session();
+    renderTime();
 
     mainInterval = setInterval(() => {
       countdownSeconds--;
@@ -51,11 +88,14 @@
         countdownMinutes--;
 
         if (countdownMinutes < 0) {
-          clear();
-          return;
+          if (isRest) {
+            session();
+          } else {
+            rest();
+          }
         }
       }
-      render();
+      renderTime();
       updateProgress();
     }, 1000)
   };

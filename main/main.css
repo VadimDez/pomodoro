@@ -1,0 +1,11 @@
+body {
+    background-color: #ff3d4e;
+    color: #ffffff;
+}
+
+.progress {
+    width: 100%;
+}
+.progress canvas {
+    width: 100%;
+}
