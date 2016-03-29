@@ -45,6 +45,7 @@ body.rest {
 }
 
 .progress {
+    margin-top: 20px;
     width: 100%;
 }
 .progress canvas {
@@ -53,8 +54,8 @@ body.rest {
 
 .countdown {
     position: absolute;
-    top: 114px;
-    left: 80px;
+    top: 130px;
+    left: 90px;
     font-size: 50px;
 }
 

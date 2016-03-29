@@ -6,6 +6,8 @@ const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
+const ipc = electron.ipcMain;
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
@@ -23,6 +25,19 @@ function createWindow () {
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
+  });
+  
+  let settingsWindonw;
+  ipc.on('show-settings', () => {
+    settingsWindonw = new BrowserWindow({
+      width: 300,
+      height: 300
+    });
+    settingsWindonw.loadURL('file://' + __dirname + '/settings/settings.html');
+
+    settingsWindonw.on('closed', function() {
+      settingsWindonw = null;
+    });
   });
 }
 

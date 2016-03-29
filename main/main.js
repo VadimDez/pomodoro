@@ -20,6 +20,7 @@
   let $body = $('body');
   const REST_CLASS = 'rest';
   const SESSION_CLASS = 'session';
+  const ipc = require('electron').ipcRenderer;
 
   $progress.circleProgress({
     value: 0,
@@ -128,4 +129,8 @@
   $('#start').on('click', onStart);
 
   $('#stop').on('click', onStop);
+
+  $('#settings').on('click', () => {
+    ipc.send('show-settings');
+  })
 }());
