@@ -31,7 +31,7 @@ function createWindow () {
   ipc.on('show-settings', () => {
     settingsWindonw = new BrowserWindow({
       width: 300,
-      height: 300
+      height: 140
     });
     settingsWindonw.loadURL('file://' + __dirname + '/settings/settings.html');
 
