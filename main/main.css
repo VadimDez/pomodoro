@@ -6,11 +6,11 @@ body {
 
 @font-face {
     font-family: 'icomoon';
-    src:    url('fonts/icomoon.eot?m33xxd');
-    src:    url('fonts/icomoon.eot?m33xxd#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?m33xxd') format('truetype'),
-    url('fonts/icomoon.woff?m33xxd') format('woff'),
-    url('fonts/icomoon.svg?m33xxd#icomoon') format('svg');
+    src:    url('fonts/icomoon.eot?5jgx5c');
+    src:    url('fonts/icomoon.eot?5jgx5c#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?5jgx5c') format('truetype'),
+    url('fonts/icomoon.woff?5jgx5c') format('woff'),
+    url('fonts/icomoon.svg?5jgx5c#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -30,6 +30,9 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-cog:before {
+    content: "\e903";
+}
 .icon-play3:before {
     content: "\e900";
 }
@@ -73,4 +76,13 @@ body.running #start {
 }
 body.running #stop {
     display: block;
+}
+
+#start, #stop, #settings {
+    cursor: pointer;
+}
+#start:hover,
+#stop:hover,
+#settings:hover {
+    opacity: 0.85;
 }
