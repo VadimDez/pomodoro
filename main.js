@@ -13,30 +13,33 @@ const ipc = electron.ipcMain;
 let mainWindow;
 
 function createWindow () {
-  // Create the browser window.
+  let settingsWindow;
   mainWindow = new BrowserWindow({width: 300, height: 400});
 
-  // and load the index.html of the app.
   mainWindow.loadURL('file://' + __dirname + '/main/main.html');
 
-  // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
     mainWindow = null;
   });
-  
-  let settingsWindonw;
+
   ipc.on('show-settings', () => {
-    settingsWindonw = new BrowserWindow({
+    
+    if (settingsWindow) {
+      settingsWindow.close();
+      settingsWindow = null;
+    }
+
+    settingsWindow = new BrowserWindow({
       width: 300,
       height: 140
     });
-    settingsWindonw.loadURL('file://' + __dirname + '/settings/settings.html');
+    settingsWindow.loadURL('file://' + __dirname + '/settings/settings.html');
 
-    settingsWindonw.on('closed', function() {
-      settingsWindonw = null;
+    settingsWindow.on('closed', function() {
+      settingsWindow = null;
     });
   });
 }
