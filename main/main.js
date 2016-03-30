@@ -8,9 +8,7 @@
   require('jquery-circle-progress');
 
   let mainInterval;
-  let minutes = 25;
   let seconds = 0;
-  let restMinutes = 5;
   let countdownMinutes;
   let countdownSeconds;
   let totalSeconds;
@@ -21,6 +19,7 @@
   const REST_CLASS = 'rest';
   const SESSION_CLASS = 'session';
   const ipc = require('electron').ipcRenderer;
+  let settings = require('remote').getGlobal('settings');
 
   $progress.circleProgress({
     value: 0,
@@ -61,9 +60,9 @@
       .addClass(SESSION_CLASS);
 
     isRest = false;
-    countdownMinutes = minutes;
+    countdownMinutes = settings.sessionLength;
     countdownSeconds = seconds;
-    totalSeconds = minutes * 60 + seconds;
+    totalSeconds = settings.sessionLength * 60 + seconds;
 
     $progress.circleProgress({
       fill: {
@@ -78,9 +77,9 @@
       .removeClass(SESSION_CLASS);
 
     isRest = true;
-    countdownMinutes = restMinutes;
+    countdownMinutes = settings.restLength;
     countdownSeconds = seconds;
-    totalSeconds = restMinutes * 60 + seconds;
+    totalSeconds = settings.restLength * 60 + seconds;
 
     $progress.circleProgress({
       fill: {

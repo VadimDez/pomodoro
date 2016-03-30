@@ -8,9 +8,10 @@ const BrowserWindow = electron.BrowserWindow;
 
 const ipc = electron.ipcMain;
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+
+// set settings
+global.settings = require('./defaultSettings.js');
 
 function createWindow () {
   let settingsWindow;
@@ -26,7 +27,7 @@ function createWindow () {
   });
 
   ipc.on('show-settings', () => {
-    
+
     if (settingsWindow) {
       settingsWindow.close();
       settingsWindow = null;
@@ -38,7 +39,12 @@ function createWindow () {
     });
     settingsWindow.loadURL('file://' + __dirname + '/settings/settings.html');
 
-    settingsWindow.on('closed', function() {
+    ipc.on('update-settings', () => {
+      if (settingsWindow) {
+        settingsWindow.close();
+      }
+    });
+    settingsWindow.on('closed', () => {
       settingsWindow = null;
     });
   });

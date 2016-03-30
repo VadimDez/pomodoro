@@ -11,7 +11,9 @@
             Session length
         </div>
         <div class="col-50 right">
-            <input type="number" value="25">
+            <label>
+                <input id="sessionLength" type="number" value="25">
+            </label>
         </div>
     </div>
     <div class="row">
@@ -19,11 +21,14 @@
             Rest length
         </div>
         <div class="col-50 right">
-            <input type="number" value="5">
+            <label>
+                <input id="restLength" type="number" value="5">
+            </label>
         </div>
     </div>
     <div class="row center">
-        <button class="btn-save">Save</button>
+        <button id="save" class="btn-save">Save</button>
     </div>
+    <script>require('./settings.js')</script>
 </body>
 </html>
