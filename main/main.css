@@ -86,3 +86,12 @@ body.running #stop {
 #settings:hover {
     opacity: 0.85;
 }
+
+#bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 16px;
+    padding: 5px;
+}
