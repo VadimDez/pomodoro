@@ -20,6 +20,8 @@
   const SESSION_CLASS = 'session';
   const ipc = require('electron').ipcRenderer;
   let settings = require('remote').getGlobal('settings');
+  let isRunning = false;
+  let isInPause = false;
 
   $progress.circleProgress({
     value: 0,
@@ -54,6 +56,9 @@
     clearInterval(mainInterval);
   };
 
+  /**
+   * Session
+   */
   const session = () => {
     $body
       .removeClass(REST_CLASS)
@@ -71,6 +76,9 @@
     });
   };
 
+  /**
+   * Rest
+   */
   const rest = () => {
     $body
       .addClass(REST_CLASS)
@@ -88,10 +96,19 @@
     });
   };
 
-  const isRunning = (value) => {
+  /**
+   * Toggle running countdown
+   *
+   * @param value
+   */
+  const setRunning = (value) => {
+    isRunning = value;
     $body.toggleClass('running', value);
   };
 
+  /**
+   * Main tick loop
+   */
   const tickProcess = () => {
     mainInterval = setInterval(() => {
       countdownSeconds--;
@@ -113,13 +130,27 @@
   };
 
   const onStart = () => {
-    isRunning(true);
+    setRunning(true);
+    isInPause = false;
     tickProcess();
   };
 
   const onStop = () => {
-    isRunning(false);
+    setRunning(false);
+    isInPause = true;
     clearInterval(mainInterval);
+  };
+
+  /**
+   * Update time settings
+   */
+  const updateSettings = () => {
+    if (isRest) {
+      rest();
+    } else {
+      session();
+    }
+    renderTime();
   };
 
   session();
@@ -131,5 +162,11 @@
 
   $('#settings').on('click', () => {
     ipc.send('show-settings');
-  })
+  });
+
+  ipc.on('settings-updated', () => {
+    if (!isRunning && !isInPause) {
+      updateSettings();
+    }
+  });
 }());

@@ -43,6 +43,8 @@ function createWindow () {
       if (settingsWindow) {
         settingsWindow.close();
       }
+      
+      mainWindow.webContents.send('settings-updated');
     });
     settingsWindow.on('closed', () => {
       settingsWindow = null;
