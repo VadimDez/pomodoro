@@ -26,7 +26,8 @@ function createWindow () {
     minHeight: mainWindowSizes.height,
     maxWidth: mainWindowSizes.width,
     maxHeight: mainWindowSizes.height,
-    resizable: false
+    resizable: false,
+    titleBarStyle: 'hidden'
   });
 
   mainWindow.loadURL('file://' + __dirname + '/main/main.html');
