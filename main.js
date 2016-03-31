@@ -9,13 +9,24 @@ const BrowserWindow = electron.BrowserWindow;
 const ipc = electron.ipcMain;
 
 let mainWindow;
+const mainWindowSizes = {
+  width: 300,
+  height: 400
+};
 
 // set settings
 global.settings = require('./defaultSettings.js');
 
 function createWindow () {
   let settingsWindow;
-  mainWindow = new BrowserWindow({width: 300, height: 400});
+  mainWindow = new BrowserWindow({
+    width: mainWindowSizes.width,
+    height: mainWindowSizes.height,
+    minWidth: mainWindowSizes.width,
+    minHeight: mainWindowSizes.height,
+    maxWidth: mainWindowSizes.width,
+    maxHeight: mainWindowSizes.height
+  });
 
   mainWindow.loadURL('file://' + __dirname + '/main/main.html');
 
