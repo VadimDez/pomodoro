@@ -11,7 +11,7 @@ const ipc = electron.ipcMain;
 let mainWindow;
 const mainWindowSizes = {
   width: 300,
-  height: 400
+  height: 315
 };
 
 // set settings

@@ -55,10 +55,13 @@ body.rest {
     width: 100%;
 }
 
-.countdown {
+.container {
     position: absolute;
-    top: 130px;
+    top: 120px;
     left: 90px;
+}
+
+.countdown {
     font-size: 50px;
 }
 
