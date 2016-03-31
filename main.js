@@ -25,7 +25,8 @@ function createWindow () {
     minWidth: mainWindowSizes.width,
     minHeight: mainWindowSizes.height,
     maxWidth: mainWindowSizes.width,
-    maxHeight: mainWindowSizes.height
+    maxHeight: mainWindowSizes.height,
+    resizable: false
   });
 
   mainWindow.loadURL('file://' + __dirname + '/main/main.html');
