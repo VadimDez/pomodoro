@@ -1,3 +1,3 @@
 # pomodoro
-Pomodoro desktop app
+Pomodoro desktop app developed with Electron
 
