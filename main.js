@@ -45,7 +45,9 @@ function createWindow () {
 
     settingsWindow = new BrowserWindow({
       width: 300,
-      height: 140
+      height: 140,
+      resizable: false,
+      titleBarStyle: 'hidden'
     });
     settingsWindow.loadURL('file://' + __dirname + '/settings/settings.html');
 
