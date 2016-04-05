@@ -4,7 +4,8 @@
   "description": "Pomodoro desktop app",
   "main": "./main.js",
   "scripts": {
-    "start": "electron ./main.js"
+    "start": "electron ./main.js",
+    "package": "rm -rf ./release && electron-packager ./ Pomodoro --platform=darwin --arch=x64 --out ./release/ --version 0.37.4 --overwrite --icon=./img/pomodoro.icns"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   },
   "homepage": "https://github.com/vadimdez/pomodoro",
   "devDependencies": {
+    "electron-packager": "^6.0.0",
     "electron-prebuilt": "^0.37.0"
   },
   "dependencies": {
