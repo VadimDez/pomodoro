@@ -1,0 +1,33 @@
+{
+  "name": "pomodoro",
+  "version": "0.1.0",
+  "description": "Pomodoro desktop app",
+  "main": "./main.js",
+  "scripts": {
+    "start": "electron ./main.js",
+    "package": "rm -rf ./release && electron-packager ./ Pomodoro --platform=darwin --arch=x64 --out ./release/ --version 0.37.4 --overwrite --icon=./img/pomodoro.icns"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vadimdez/pomodoro.git"
+  },
+  "keywords": [
+    "Electron",
+    "pomodoro",
+    "timer"
+  ],
+  "author": "Vadym Yatsyuk <vadym.yatsyuk@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vadimdez/pomodoro/issues"
+  },
+  "homepage": "https://github.com/vadimdez/pomodoro",
+  "devDependencies": {
+    "electron-packager": "^6.0.0",
+    "electron-prebuilt": "^0.37.0"
+  },
+  "dependencies": {
+    "jquery": "^2.2.2",
+    "jquery-circle-progress": "^1.1.3"
+  }
+}
