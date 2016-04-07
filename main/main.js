@@ -5,7 +5,6 @@
 (function () {
   "use strict";
   window.$ = window.jQuery = require('jquery');
-  require('jquery-circle-progress');
 
   let mainInterval;
   let seconds = 0;
