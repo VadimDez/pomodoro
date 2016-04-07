@@ -35,6 +35,9 @@ body {
 .icon-cog:before {
     content: "\e903";
 }
+.icon-cross:before {
+    content: "\e904";
+}
 .icon-play3:before {
     content: "\e900";
 }
@@ -90,7 +93,7 @@ body.running #stop {
     display: block;
 }
 
-#start, #stop, #settings {
+#start, #stop, #settings, #close {
     cursor: pointer;
 }
 #start:hover,
@@ -102,6 +105,15 @@ body.running #stop {
 #bottom-bar {
     position: absolute;
     bottom: 0;
+    left: 0;
+    right: 0;
+    height: 16px;
+    padding: 5px;
+}
+
+#navbar {
+    position: absolute;
+    top: 0;
     left: 0;
     right: 0;
     height: 16px;
