@@ -5,7 +5,7 @@
   "main": "./main.js",
   "scripts": {
     "start": "electron ./main.js",
-    "package": "rm -rf ./release && electron-packager ./ Pomodoro --platform=darwin --arch=x64 --out ./release/ --version 0.37.4 --overwrite --icon=./img/pomodoro.icns"
+    "package": "rm -rf ./release/ && electron-packager ./ Pomodoro --platform=darwin --arch=x64 --out ./release/ --version 0.37.4 --overwrite --icon=./img/pomodoro.icns"
   },
   "repository": {
     "type": "git",
