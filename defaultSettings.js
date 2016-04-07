@@ -4,5 +4,6 @@
 
 module.exports = {
   sessionLength: 25,
-  restLength: 5
+  restLength: 5,
+  transparencyLevel: 1
 };

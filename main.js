@@ -22,12 +22,18 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: mainWindowSizes.width,
     height: mainWindowSizes.height,
-    minWidth: mainWindowSizes.width,
-    minHeight: mainWindowSizes.height,
-    maxWidth: mainWindowSizes.width,
-    maxHeight: mainWindowSizes.height,
-    resizable: false,
-    titleBarStyle: 'hidden'
+    // minWidth: mainWindowSizes.width,
+    // minHeight: mainWindowSizes.height,
+    // maxWidth: mainWindowSizes.width,
+    // maxHeight: mainWindowSizes.height,
+    // resizable: false,
+    titleBarStyle: 'hidden',
+    frame: false,
+    transparent: true,
+    'web-preferences': {
+      'direct-write': true,
+      'subpixel-font-scaling': true
+    }
   });
 
   mainWindow.loadURL('file://' + __dirname + '/main/main.html');
@@ -45,7 +51,7 @@ function createWindow () {
 
     settingsWindow = new BrowserWindow({
       width: 300,
-      height: 140,
+      height: 170,
       resizable: false,
       titleBarStyle: 'hidden'
     });
@@ -58,6 +64,7 @@ function createWindow () {
       
       mainWindow.webContents.send('settings-updated');
     });
+    
     settingsWindow.on('closed', () => {
       settingsWindow = null;
     });

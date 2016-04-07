@@ -168,5 +168,11 @@
     if (!isRunning && !isInPause) {
       updateSettings();
     }
+
+    $body
+      .removeClass((index, css) => {
+        return (css.match (/\btransparencyLevel-\S+/g) || []).join(' ');
+      })
+      .addClass(`transparencyLevel-${settings.transparencyLevel}`);
   });
 }());

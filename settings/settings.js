@@ -10,11 +10,15 @@
   $('#sessionLength').val(settings.sessionLength);
   $('#restLength').val(settings.restLength);
 
-  $('#save').on('click', () => {
+  $('#save').off().on('click', () => {
     settings.sessionLength = $('#sessionLength').val();
     settings.restLength = $('#restLength').val();
     ipc.send('update-settings');
   });
 
+  $('#transparencyLevel').off().on('change', function () {
+    settings.transparencyLevel = this.value;
+    ipc.send('update-updated')
+  });
 
 }());
