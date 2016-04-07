@@ -13,21 +13,16 @@
   let countdownSeconds;
   let totalSeconds;
   let isRest = false;
-  let $progress = $('.progress');
+  let $progress = $('#bar');
   let $countdown = $('.countdown');
   let $body = $('body');
   const REST_CLASS = 'rest';
   const SESSION_CLASS = 'session';
+  const MAX_PROGRESS_VALUE = 810;
   const ipc = require('electron').ipcRenderer;
   let settings = require('remote').getGlobal('settings');
   let isRunning = false;
   let isInPause = false;
-
-  $progress.circleProgress({
-    value: 0,
-    size: 300,
-    animation: false
-  });
 
   /**
    * Adjust value to have always two digits
@@ -49,7 +44,7 @@
    * Update progress chart
    */
   const updateProgress = () => {
-    $progress.circleProgress('value', (totalSeconds - countdownMinutes * 60 - countdownSeconds) / totalSeconds);
+    $progress.css('stroke-dashoffset', ((totalSeconds - countdownMinutes * 60 - countdownSeconds) * MAX_PROGRESS_VALUE) / totalSeconds)
   };
 
   const clear = () => {
@@ -68,12 +63,6 @@
     countdownMinutes = settings.sessionLength;
     countdownSeconds = seconds;
     totalSeconds = settings.sessionLength * 60 + seconds;
-
-    $progress.circleProgress({
-      fill: {
-        color: '#ffffff'
-      }
-    });
   };
 
   /**
@@ -88,12 +77,6 @@
     countdownMinutes = settings.restLength;
     countdownSeconds = seconds;
     totalSeconds = settings.restLength * 60 + seconds;
-
-    $progress.circleProgress({
-      fill: {
-        color: '#ffffff'
-      }
-    });
   };
 
   /**
@@ -158,7 +141,6 @@
       'background-color': `rgba(255, 61, 78, ${settings.transparencyLevel})`,
       opacity: settings.transparencyLevel
     });
-
   };
 
   session();

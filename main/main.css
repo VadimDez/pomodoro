@@ -49,12 +49,19 @@ body.rest {
     background-color: #8D99AE;
 }
 
-.progress {
-    margin-top: 20px;
-    width: 100%;
+#progress {
+    margin-top: 10px;
 }
-.progress canvas {
-    width: 100%;
+
+#progress circle {
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear;
+    stroke-width: 20px;
+    stroke: rgba(102, 102, 102, 0.38);
+}
+#progress #bar {
+    transform: scaleX(-1) rotate(-90deg);
+    stroke: #ffffff;
 }
 
 .container {
