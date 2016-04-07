@@ -29,11 +29,7 @@ function createWindow () {
     // resizable: false,
     titleBarStyle: 'hidden',
     frame: false,
-    transparent: true,
-    'web-preferences': {
-      'direct-write': true,
-      'subpixel-font-scaling': true
-    }
+    transparent: true
   });
 
   mainWindow.loadURL('file://' + __dirname + '/main/main.html');
@@ -57,6 +53,10 @@ function createWindow () {
     });
     settingsWindow.loadURL('file://' + __dirname + '/settings/settings.html');
 
+    ipc.on('settings-transparency-level', () => {
+      mainWindow.webContents.send('settings-transparency-level');
+    });
+    
     ipc.on('update-settings', () => {
       if (settingsWindow) {
         settingsWindow.close();

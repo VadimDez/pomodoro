@@ -152,6 +152,14 @@
     }
     renderTime();
   };
+  
+  const updateTransparencyLevel = () => {
+    $body.css({
+      'background-color': `rgba(255, 61, 78, ${settings.transparencyLevel})`,
+      opacity: settings.transparencyLevel
+    });
+
+  };
 
   session();
   renderTime();
@@ -168,11 +176,9 @@
     if (!isRunning && !isInPause) {
       updateSettings();
     }
+  });
 
-    $body
-      .removeClass((index, css) => {
-        return (css.match (/\btransparencyLevel-\S+/g) || []).join(' ');
-      })
-      .addClass(`transparencyLevel-${settings.transparencyLevel}`);
+  ipc.on('settings-transparency-level', () => {
+    updateTransparencyLevel();
   });
 }());

@@ -17,8 +17,8 @@
   });
 
   $('#transparencyLevel').off().on('change', function () {
-    settings.transparencyLevel = this.value;
-    ipc.send('update-updated')
+    settings.transparencyLevel = this.value / 10;
+    ipc.send('settings-transparency-level');
   });
 
 }());
