@@ -22,11 +22,11 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: mainWindowSizes.width,
     height: mainWindowSizes.height,
-    // minWidth: mainWindowSizes.width,
-    // minHeight: mainWindowSizes.height,
-    // maxWidth: mainWindowSizes.width,
-    // maxHeight: mainWindowSizes.height,
-    // resizable: false,
+    minWidth: mainWindowSizes.width,
+    minHeight: mainWindowSizes.height,
+    maxWidth: mainWindowSizes.width,
+    maxHeight: mainWindowSizes.height,
+    resizable: false,
     titleBarStyle: 'hidden',
     frame: false,
     transparent: true
