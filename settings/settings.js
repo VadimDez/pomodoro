@@ -16,7 +16,9 @@
     ipc.send('update-settings');
   });
 
-  $('#transparencyLevel').off().on('change', function () {
+  $('#transparencyLevel')
+    .val(settings.transparencyLevel * 10)
+    .off().on('change', function () {
     settings.transparencyLevel = this.value / 10;
     ipc.send('settings-transparency-level');
   });
