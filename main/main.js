@@ -22,6 +22,7 @@
   let settings = require('remote').getGlobal('settings');
   let isRunning = false;
   let isInPause = false;
+  const audio = new Audio('../sounds/ding.mp3');
 
   /**
    * Adjust value to have always two digits
@@ -99,6 +100,8 @@
         countdownMinutes--;
 
         if (countdownMinutes < 0) {
+          audio.play();
+
           if (isRest) {
             session();
           } else {
