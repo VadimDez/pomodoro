@@ -3,23 +3,24 @@
  */
 (function () {
   "use strict";
-  window.$ = window.jQuery = require('jquery');
   const ipc = require('electron').ipcRenderer;
   let settings = require('remote').getGlobal('settings');
+  let $sessionLength = document.getElementById('sessionLength');
+  let $restLength = document.getElementById('restLength');
+  let $transparencyLevel = document.getElementById('transparencyLevel');
 
-  $('#sessionLength').val(settings.sessionLength);
-  $('#restLength').val(settings.restLength);
+  $sessionLength.value = settings.sessionLength;
+  $restLength.value = settings.restLength;
 
-  $('#save').off().on('click', () => {
-    settings.sessionLength = $('#sessionLength').val();
-    settings.restLength = $('#restLength').val();
+  document.getElementById('save').addEventListener('click', () => {
+    settings.sessionLength = $sessionLength.value;
+    settings.restLength = $restLength.value;
     ipc.send('update-settings');
   });
 
-  $('#transparencyLevel')
-    .val(settings.transparencyLevel * 10)
-    .off().on('change', function () {
-    settings.transparencyLevel = this.value / 10;
+  $transparencyLevel.value = settings.transparencyLevel * 10;
+  $transparencyLevel.addEventListener('change', (e) => {
+    settings.transparencyLevel = e.target.value / 10;
     ipc.send('settings-transparency-level');
   });
 

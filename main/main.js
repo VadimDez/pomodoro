@@ -4,7 +4,6 @@
 
 (function () {
   "use strict";
-  window.$ = window.jQuery = require('jquery');
 
   let mainInterval;
   let seconds = 0;
@@ -12,9 +11,9 @@
   let countdownSeconds;
   let totalSeconds;
   let isRest = false;
-  let $progress = $('#bar');
-  let $countdown = $('.countdown');
-  let $body = $('body');
+  let $progress = document.getElementById('bar');// $('#bar');
+  let $countdown = document.getElementsByClassName('countdown')[0];//$('.countdown');
+  let $body = document.getElementsByTagName('body')[0];// $('body');
   const REST_CLASS = 'rest';
   const SESSION_CLASS = 'session';
   const MAX_PROGRESS_VALUE = 810;
@@ -37,14 +36,14 @@
    * Render time
    */
   const renderTime = () => {
-    $countdown.text(`${doubleDigit(countdownMinutes)}:${doubleDigit(countdownSeconds)}`);
+    $countdown.innerText = `${doubleDigit(countdownMinutes)}:${doubleDigit(countdownSeconds)}`;
   };
 
   /**
    * Update progress chart
    */
   const updateProgress = () => {
-    $progress.css('stroke-dashoffset', ((totalSeconds - countdownMinutes * 60 - countdownSeconds) * MAX_PROGRESS_VALUE) / totalSeconds)
+    $progress.style['stroke-dashoffset'] = ((totalSeconds - countdownMinutes * 60 - countdownSeconds) * MAX_PROGRESS_VALUE) / totalSeconds;
   };
 
   const clear = () => {
@@ -52,12 +51,35 @@
   };
 
   /**
+   * Add / Delete class on element
+   *
+   * @param {Object}  $elem
+   * @param {String}  className
+   * @param {Boolean} toggle
+   */
+  const toggleClass = ($elem, className, toggle) => {
+    const classPosition = $elem.className.indexOf(className);
+
+    if (toggle) {
+      if (classPosition === -1) {
+        $elem.className = ` ${className}`;
+      }
+
+      return;
+    }
+
+    if (classPosition !== -1) {
+      $elem.className = $elem.className.substr(0, classPosition)
+        .concat($elem.className.substr(classPosition + className.length));
+    }
+  };
+
+  /**
    * Session
    */
   const session = () => {
-    $body
-      .removeClass(REST_CLASS)
-      .addClass(SESSION_CLASS);
+    toggleClass($body, REST_CLASS, false);
+    toggleClass($body, SESSION_CLASS, true);
 
     isRest = false;
     countdownMinutes = settings.sessionLength;
@@ -69,9 +91,8 @@
    * Rest
    */
   const rest = () => {
-    $body
-      .addClass(REST_CLASS)
-      .removeClass(SESSION_CLASS);
+    toggleClass($body, REST_CLASS, true);
+    toggleClass($body, SESSION_CLASS, false);
 
     isRest = true;
     countdownMinutes = settings.restLength;
@@ -86,7 +107,7 @@
    */
   const setRunning = (value) => {
     isRunning = value;
-    $body.toggleClass('running', value);
+    toggleClass($body, 'running', value);
   };
 
   /**
@@ -139,20 +160,18 @@
   };
   
   const updateTransparencyLevel = () => {
-    $body.css({
-      'background-color': `rgba(255, 61, 78, ${settings.transparencyLevel})`,
-      opacity: settings.transparencyLevel
-    });
+    $body.style['background-color'] = `rgba(255, 61, 78, ${settings.transparencyLevel})`;
+    $body.style.opacity = settings.transparencyLevel;
   };
 
   session();
   renderTime();
 
-  $('#start').on('click', onStart);
+  document.getElementById('start').addEventListener('click', onStart);
 
-  $('#stop').on('click', onStop);
+  document.getElementById('stop').addEventListener('click', onStop);
 
-  $('#settings').on('click', () => {
+  document.getElementById('settings').addEventListener('click', () => {
     ipc.send('show-settings');
   });
 

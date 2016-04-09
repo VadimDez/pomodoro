@@ -57,7 +57,7 @@ body.rest {
     stroke-dashoffset: 0;
     transition: stroke-dashoffset 1s linear;
     stroke-width: 20px;
-    stroke: rgba(102, 102, 102, 0.38);
+    stroke: rgba(102, 102, 102, 0.25);
 }
 #progress #bar {
     transform: scaleX(-1) rotate(-90deg);
