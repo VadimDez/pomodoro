@@ -65,10 +65,6 @@ function createWindow () {
       mainWindow.webContents.send('settings-updated');
     });
 
-    ipc.on('close', () => {
-      mainWindow.close();
-    });
-
     settingsWindow.on('closed', () => {
       settingsWindow = null;
     });

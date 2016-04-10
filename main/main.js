@@ -18,7 +18,8 @@
   const SESSION_CLASS = 'session';
   const MAX_PROGRESS_VALUE = 810;
   const ipc = require('electron').ipcRenderer;
-  let settings = require('remote').getGlobal('settings');
+  const remote = require('remote');
+  let settings = remote.getGlobal('settings');
   let isRunning = false;
   let isInPause = false;
   const audio = new Audio('../sounds/ding.mp3');
@@ -176,7 +177,7 @@
   });
   
   document.getElementById('close').addEventListener('click', () => {
-    ipc.send('close');
+    remote.getCurrentWindow().close();
   });
 
   ipc.on('settings-updated', () => {
