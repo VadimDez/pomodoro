@@ -152,6 +152,10 @@
   $('#settings').on('click', () => {
     ipc.send('show-settings');
   });
+  
+  document.getElementById('close').addEventListener('click', () => {
+    ipc.send('close');
+  });
 
   ipc.on('settings-updated', () => {
     if (!isRunning && !isInPause) {

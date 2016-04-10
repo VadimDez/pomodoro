@@ -3,7 +3,8 @@ body {
     color: #ffffff;
     font-family: 'Helvetica Neue', 'Open Sans', Helvetica, Arial, sans-serif;
     overflow: hidden;
-    /*opacity: 0.5;*/
+    padding: 0;
+    margin: 0;
 }
 
 @font-face {
@@ -111,11 +112,6 @@ body.running #stop {
     padding: 5px;
 }
 
-#navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 16px;
-    padding: 5px;
+#close {
+    float: right;
 }
