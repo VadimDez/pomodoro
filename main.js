@@ -14,6 +14,86 @@ const mainWindowSizes = {
   height: 315
 };
 
+const Menu = electron.Menu;
+const MenuItem = electron.MenuItem;
+
+var template = [
+  {
+    label: 'Window',
+    role: 'window',
+    submenu: [
+      {
+        label: 'Minimize',
+        accelerator: 'CmdOrCtrl+M',
+        role: 'minimize'
+      },
+      {
+        label: 'Close',
+        accelerator: 'CmdOrCtrl+W',
+        role: 'close'
+      }
+    ]
+  }
+];
+
+if (process.platform == 'darwin') {
+  var name = app.getName();
+
+  // Window menu.
+  template[0].submenu.push(
+    {
+      type: 'separator'
+    },
+    {
+      label: 'Bring All to Front',
+      role: 'front'
+    }
+  );
+
+  template.unshift({
+    label: name,
+    submenu: [
+      {
+        label: 'About ' + name,
+        role: 'about'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Services',
+        role: 'services',
+        submenu: []
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Hide ' + name,
+        accelerator: 'Command+H',
+        role: 'hide'
+      },
+      {
+        label: 'Hide Others',
+        accelerator: 'Command+Alt+H',
+        role: 'hideothers'
+      },
+      {
+        label: 'Show All',
+        role: 'unhide'
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Quit',
+        accelerator: 'Command+Q',
+        click: function() { app.quit(); }
+      }
+    ]
+  });
+}
+
 // set settings
 global.settings = require('./defaultSettings.js');
 
@@ -69,6 +149,10 @@ function createWindow () {
       settingsWindow = null;
     });
   });
+
+
+  var menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
 }
 
 app.on('ready', createWindow);
