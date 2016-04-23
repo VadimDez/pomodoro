@@ -55,7 +55,17 @@ if (process.platform == 'darwin') {
     submenu: [
       {
         label: 'About ' + name,
-        role: 'about'
+        click: () => {
+          let dialog = require('dialog');
+
+          dialog.showMessageBox(mainWindow, {
+            type: 'info',
+            title: 'About',
+            buttons: ['Ok'],
+            message: `Pomodoro v0.1.0`,
+            detail: 'by Vadym Yatsyuk'
+          });
+        }
       },
       {
         type: 'separator'
