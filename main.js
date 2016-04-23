@@ -62,7 +62,7 @@ if (process.platform == 'darwin') {
             type: 'info',
             title: 'About',
             buttons: ['Ok'],
-            message: `Pomodoro v0.1.0`,
+            message: `Pomodoro v0.1.1`,
             detail: 'by Vadym Yatsyuk'
           });
         }
